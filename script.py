@@ -39,7 +39,7 @@ i = 0
 with open("donnees.csv", "w", encoding="utf-8") as fichier:
     writer = csv.writer(fichier)
     while i < len(titres):
-        writer.writerow((titres[i]))
+        writer.writerow((titres[i].text))
         i+=1
 
 
