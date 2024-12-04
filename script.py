@@ -15,20 +15,22 @@ else:
     print("Impossible de récupérer la page")
 
 
-# 2. Analyser le HTML 
+# 2. Parser les données avec lxml
+
 soup = BeautifulSoup(html_content, "lxml")
+#print(soup.prettify())
 
 # 3. Extraire les données
 
-titres = soup.find_all("h2", {"class": "meta-title"})
-for titre in titres:
-    print(titre.text)
 
-'''
-infos = soup.find_all('h2', {"class": "meta meta-affinity-score"})
-for info in infos:
-    description_film = info.text.strip()
-    print(description_film)
+titres = soup.find_all("h2", {"class": "meta-title"})
+infos = soup.find_all("div", {"class": "meta-body-item meta-body-direction"})
+
+# 4. Utiliser la fonction zip pour regrouper les données de titres et celles d'infos
+
+for titre, info in zip(titres, infos):
+    print(titre.text.strip(), info.text.strip())
+
 '''
 # 4. Enregistrer les données dans un fichier csv
 
@@ -43,4 +45,4 @@ with open("donnees.csv", "w", encoding="utf-8") as fichier:
         i+=1
 
 
-
+'''
