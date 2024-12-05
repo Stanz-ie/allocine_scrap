@@ -1,7 +1,6 @@
 import os
 import requests
 import csv
-import re
 from bs4 import BeautifulSoup
 
 # 1. Faire une requête GET pour charger la page et stocker le HTML
