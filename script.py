@@ -1,6 +1,7 @@
 import os
 import requests
 import csv
+import re
 from bs4 import BeautifulSoup
 
 # 1. Faire une requête GET pour charger la page et stocker le HTML
@@ -24,12 +25,13 @@ soup = BeautifulSoup(html_content, "lxml")
 
 
 titres = soup.find_all("h2", {"class": "meta-title"})
-infos = soup.find_all("div", {"class": "meta-body-item meta-body-direction"})
+infos = soup.find_all("div", {"class": "meta-body"})
 
-# 4. Utiliser la fonction zip pour regrouper les données de titres et celles d'infos
+# 4. Utiliser la fonction zip pour regrouper les titres et les d'infos par film
 
 for titre, info in zip(titres, infos):
-    print(titre.text.strip(), info.text.strip())
+    infos_sans_espace = " ".join(info.text.split())
+    print(titre.text, infos_sans_espace)
 
 '''
 # 4. Enregistrer les données dans un fichier csv
